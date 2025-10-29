@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medications - MediCare</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/medications.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar (same as dashboard) -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediCare</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="medications.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Medications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="reminders.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Reminders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="history.html">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="hospitals.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospitals & Clinics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doctors.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="vitals.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Vital Signs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>My Medications</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-primary" onclick="showAddMedicationModal()">
+                        <i class="fas fa-plus"></i>
+                        Add Medication
+                    </button>
+                </div>
+            </header>
+
+            <div class="medications-content">
+                <!-- Search and Filter -->
+                <div class="medications-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search medications..." id="medicationSearch">
+                    </div>
+                    <div class="filter-controls">
+                        <select id="medicationTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="prescription">Prescription</option>
+                            <option value="otc">Over-the-Counter</option>
+                            <option value="supplement">Supplement</option>
+                        </select>
+                        <select id="medicationStatusFilter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interaction Warnings -->
+                <div id="interactionWarnings" class="interaction-warnings">
+                    <!-- Warnings will be populated by JavaScript -->
+                </div>
+
+                <!-- Medications Grid -->
+                <div class="medications-grid">
+                    <div class="medication-card active">
+                        <div class="medication-header">
+                            <div class="medication-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="medication-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                        </div>
+                        <div class="medication-info">
+                            <h3>Metformin</h3>
+                            <p class="dosage">500mg</p>
+                            <p class="frequency">Twice daily with meals</p>
+                            <p class="condition">For Type 2 Diabetes</p>
+                        </div>
+                        <div class="medication-details">
+                            <div class="detail-item">
+                                <span class="label">Stock:</span>
+                                <span class="value">28 pills</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Next dose:</span>
+                                <span class="value">2:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Prescribed by:</span>
+                                <span class="value">Dr. Johnson</span>
+                            </div>
+                        </div>
+                        <div class="medication-actions">
+                            <button class="btn-icon" onclick="editMedication(1)" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" onclick="orderRefill(1)" title="Order Refill">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                            <button class="btn-icon" onclick="pauseMedication(1)" title="Pause">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="btn-icon danger" onclick="deleteMedication(1)" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="medication-card active">
+                        <div class="medication-header">
+                            <div class="medication-icon">
+                                <i class="fas fa-tablets"></i>
+                            </div>
+                            <div class="medication-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                        </div>
+                        <div class="medication-info">
+                            <h3>Lisinopril</h3>
+                            <p class="dosage">10mg</p>
+                            <p class="frequency">Once daily</p>
+                            <p class="condition">For High Blood Pressure</p>
+                        </div>
+                        <div class="medication-details">
+                            <div class="detail-item">
+                                <span class="label">Stock:</span>
+                                <span class="value low-stock">5 pills</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Next dose:</span>
+                                <span class="value">8:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Prescribed by:</span>
+                                <span class="value">Dr. Smith</span>
+                            </div>
+                        </div>
+                        <div class="medication-actions">
+                            <button class="btn-icon" onclick="editMedication(2)" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon urgent" onclick="orderRefill(2)" title="Order Refill - Low Stock">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                            <button class="btn-icon" onclick="pauseMedication(2)" title="Pause">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="btn-icon danger" onclick="deleteMedication(2)" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="medication-card active">
+                        <div class="medication-header">
+                            <div class="medication-icon">
+                                <i class="fas fa-capsules"></i>
+                            </div>
+                            <div class="medication-status">
+                                <span class="status-badge active">Active</span>
+                            </div>
+                        </div>
+                        <div class="medication-info">
+                            <h3>Vitamin D3</h3>
+                            <p class="dosage">1000 IU</p>
+                            <p class="frequency">Once daily with food</p>
+                            <p class="condition">Supplement</p>
+                        </div>
+                        <div class="medication-details">
+                            <div class="detail-item">
+                                <span class="label">Stock:</span>
+                                <span class="value">45 capsules</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Next dose:</span>
+                                <span class="value">8:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Type:</span>
+                                <span class="value">Over-the-Counter</span>
+                            </div>
+                        </div>
+                        <div class="medication-actions">
+                            <button class="btn-icon" onclick="editMedication(3)" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-icon" onclick="orderRefill(3)" title="Order Refill">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                            <button class="btn-icon" onclick="pauseMedication(3)" title="Pause">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button class="btn-icon danger" onclick="deleteMedication(3)" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Medication Modal -->
+    <div id="addMedicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Medication</h2>
+                <button class="close-btn" onclick="hideAddMedicationModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="medication-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="medicationName">Medication Name</label>
+                        <input type="text" id="medicationName" placeholder="Enter medication name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosage">Dosage</label>
+                        <input type="text" id="dosage" placeholder="e.g., 500mg" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="frequency">Frequency</label>
+                        <select id="frequency" required>
+                            <option value="">Select frequency</option>
+                            <option value="once">Once daily</option>
+                            <option value="twice">Twice daily</option>
+                            <option value="three">Three times daily</option>
+                            <option value="four">Four times daily</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medicationType">Type</label>
+                        <select id="medicationType" required>
+                            <option value="">Select type</option>
+                            <option value="prescription">Prescription</option>
+                            <option value="otc">Over-the-Counter</option>
+                            <option value="supplement">Supplement</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="condition">Condition/Purpose</label>
+                    <input type="text" id="condition" placeholder="What is this medication for?">
+                </div>
+
+                <div class="form-group">
+                    <label for="instructions">Instructions</label>
+                    <textarea id="instructions" placeholder="Special instructions (e.g., take with food, avoid alcohol)"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date (Optional)</label>
+                        <input type="date" id="endDate">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stockQuantity">Current Stock</label>
+                        <input type="number" id="stockQuantity" placeholder="Number of pills/doses" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="prescribedBy">Prescribed By</label>
+                        <input type="text" id="prescribedBy" placeholder="Doctor's name">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="hideAddMedicationModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Medication</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/interactions.js"></script>
+    <script src="scripts/medications.js"></script>
+</body>
+</html>

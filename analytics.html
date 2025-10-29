@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Analytics - MediCare</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/analytics.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediCare</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="medications.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Medications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="reminders.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Reminders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="history.html">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="hospitals.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospitals & Clinics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doctors.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="vitals.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Vital Signs</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Health Analytics</h1>
+                </div>
+                <div class="header-right">
+                    <select id="timeRange" onchange="updateAnalytics()">
+                        <option value="7d">Last 7 days</option>
+                        <option value="30d" selected>Last 30 days</option>
+                        <option value="90d">Last 90 days</option>
+                        <option value="1y">Last year</option>
+                    </select>
+                </div>
+            </header>
+
+            <div class="analytics-content">
+                <!-- Health Score -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-trophy"></i> Health Score</h2>
+                    </div>
+                    <div id="healthScore" class="score-container">
+                        <!-- Health score will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Health Insights -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-lightbulb"></i> Health Insights</h2>
+                    </div>
+                    <div id="healthInsights" class="insights-container">
+                        <!-- Insights will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Health Trends -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Health Trends</h2>
+                    </div>
+                    <div id="healthTrends" class="trends-container">
+                        <!-- Trends will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-bar"></i> Detailed Analytics</h2>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>Medication Adherence</h3>
+                            <canvas id="adherenceChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Blood Pressure Trend</h3>
+                            <canvas id="bloodPressureChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Heart Rate Trend</h3>
+                            <canvas id="heartRateChart"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Weight Tracking</h3>
+                            <canvas id="weightChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-clipboard-check"></i> Health Recommendations</h2>
+                    </div>
+                    <div id="healthRecommendations" class="recommendations-container">
+                        <!-- Recommendations will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/analytics.js"></script>
+    <script src="scripts/analytics-ui.js"></script>
+</body>
+</html>

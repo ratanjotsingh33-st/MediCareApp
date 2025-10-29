@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MediCare</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediCare</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="medications.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Medications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="reminders.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Reminders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="history.html">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="hospitals.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospitals & Clinics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doctors.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="vitals.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Vital Signs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="medical-id.html">
+                        <i class="fas fa-id-card"></i>
+                        <span>Medical ID</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <button class="notification-btn" onclick="showNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <img src="/placeholder.svg?height=40&width=40" alt="Profile" class="profile-avatar">
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Active Medications</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Pending Reminders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Doses This Week</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>Doctor Appointments</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Schedule -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Today's Medication Schedule</h2>
+                        <button class="btn-secondary" onclick="addMedication()">
+                            <i class="fas fa-plus"></i>
+                            Add Medication
+                        </button>
+                    </div>
+                    <div class="medication-schedule">
+                        <div class="schedule-item completed">
+                            <div class="schedule-time">
+                                <span class="time">8:00 AM</span>
+                                <span class="status">Taken</span>
+                            </div>
+                            <div class="schedule-medication">
+                                <h4>Metformin 500mg</h4>
+                                <p>Take with breakfast</p>
+                            </div>
+                            <div class="schedule-actions">
+                                <button class="btn-icon completed">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item pending">
+                            <div class="schedule-time">
+                                <span class="time">2:00 PM</span>
+                                <span class="status">Pending</span>
+                            </div>
+                            <div class="schedule-medication">
+                                <h4>Lisinopril 10mg</h4>
+                                <p>Take after lunch</p>
+                            </div>
+                            <div class="schedule-actions">
+                                <button class="btn-icon" onclick="markAsTaken(this)">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn-icon" onclick="snoozeReminder(this)">
+                                    <i class="fas fa-clock"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item upcoming">
+                            <div class="schedule-time">
+                                <span class="time">8:00 PM</span>
+                                <span class="status">Upcoming</span>
+                            </div>
+                            <div class="schedule-medication">
+                                <h4>Vitamin D3 1000IU</h4>
+                                <p>Take with dinner</p>
+                            </div>
+                            <div class="schedule-actions">
+                                <button class="btn-icon" onclick="markAsTaken(this)">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <a href="history.html" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Metformin 500mg</strong> taken at 8:00 AM</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                <div class="activity-content">
+                    <p>Appointment scheduled with <strong>Dr. Smith</strong></p>
+                    <span class="activity-time">Yesterday</span>
+                </div>
+
+                <!-- Interaction Warnings Section -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Medication Alerts</h3>
+                        <button class="btn-link" onclick="window.location.href='medications.html'">View All</button>
+                    </div>
+                    <div id="dashboardWarnings" class="warnings-preview">
+                        <!-- Warnings will be populated by JavaScript -->
+                    </div>
+                </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Ordered <strong>Lisinopril 10mg</strong> refill</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Panel -->
+    <div id="notificationPanel" class="notification-panel">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" onclick="hideNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-icon">
+                    <i class="fas fa-pills"></i>
+                </div>
+                <div class="notification-content">
+                    <p>Time to take your Lisinopril 10mg</p>
+                    <span class="notification-time">Now</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <div class="notification-content">
+                    <p>Doctor appointment tomorrow at 2:00 PM</p>
+                    <span class="notification-time">1 hour ago</span>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                    <p>Low stock: Metformin (3 pills remaining)</p>
+                    <span class="notification-time">3 hours ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/interactions.js"></script>
+    <script src="scripts/analytics.js"></script>
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>

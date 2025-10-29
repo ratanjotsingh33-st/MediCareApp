@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals & Clinics - MediCare</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/hospitals.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediCare</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="medications.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Medications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="reminders.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Reminders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="history.html">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="hospitals.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospitals & Clinics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doctors.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="vitals.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Vital Signs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Hospitals & Clinics</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-primary" onclick="getCurrentLocation()">
+                        <i class="fas fa-location-arrow"></i>
+                        Use My Location
+                    </button>
+                </div>
+            </header>
+
+            <div class="hospitals-content">
+                <!-- Search and Filters -->
+                <div class="search-section">
+                    <div class="location-search">
+                        <div class="search-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="locationInput" placeholder="Enter your location or zip code">
+                            <button class="search-btn" onclick="searchLocation()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label for="hospitalSearch">Search:</label>
+                            <input type="text" id="hospitalSearch" placeholder="Search hospitals...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="hospitalTypeFilter">Type:</label>
+                            <select id="hospitalTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="hospital">Hospitals</option>
+                                <option value="clinic">Clinics</option>
+                                <option value="urgent-care">Urgent Care</option>
+                                <option value="pharmacy">Pharmacies</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="specialty">Specialty:</label>
+                            <select id="specialty">
+                                <option value="">All Specialties</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="endocrinology">Endocrinology</option>
+                                <option value="family-medicine">Family Medicine</option>
+                                <option value="internal-medicine">Internal Medicine</option>
+                                <option value="orthopedics">Orthopedics</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="distance">Distance:</label>
+                            <select id="distance">
+                                <option value="5">Within 5 miles</option>
+                                <option value="10" selected>Within 10 miles</option>
+                                <option value="25">Within 25 miles</option>
+                                <option value="50">Within 50 miles</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map and Results -->
+                <div class="results-section">
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <p>Interactive map will be displayed here</p>
+                            <small>Integration with Google Maps or similar service</small>
+                        </div>
+                    </div>
+
+                    <div class="facilities-list">
+                        <div class="facility-card">
+                            <div class="facility-header">
+                                <div class="facility-type hospital">
+                                    <i class="fas fa-hospital"></i>
+                                    <span>Hospital</span>
+                                </div>
+                                <div class="facility-distance">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>2.3 miles</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-info">
+                                <h3>St. Mary's General Hospital</h3>
+                                <p class="facility-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    123 Healthcare Drive, New York, NY 10001
+                                </p>
+                                <p class="facility-phone">
+                                    <i class="fas fa-phone"></i>
+                                    (555) 123-4567
+                                </p>
+                            </div>
+
+                            <div class="facility-details">
+                                <div class="detail-item">
+                                    <span class="label">Rating:</span>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span>4.2 (156 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Hours:</span>
+                                    <span class="value open">Open 24/7</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Emergency:</span>
+                                    <span class="value available">Available</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-specialties">
+                                <span class="specialty-tag">Cardiology</span>
+                                <span class="specialty-tag">Emergency Medicine</span>
+                                <span class="specialty-tag">Internal Medicine</span>
+                                <span class="specialty-tag">Surgery</span>
+                            </div>
+
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="getDirections('st-marys')">
+                                    <i class="fas fa-directions"></i>
+                                    Directions
+                                </button>
+                                <button class="btn-secondary" onclick="callFacility('555-123-4567')">
+                                    <i class="fas fa-phone"></i>
+                                    Call
+                                </button>
+                                <button class="btn-primary" onclick="bookAppointment('st-marys')">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-header">
+                                <div class="facility-type clinic">
+                                    <i class="fas fa-clinic-medical"></i>
+                                    <span>Clinic</span>
+                                </div>
+                                <div class="facility-distance">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>1.8 miles</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-info">
+                                <h3>Downtown Family Medical Center</h3>
+                                <p class="facility-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    456 Main Street, Suite 200, New York, NY 10002
+                                </p>
+                                <p class="facility-phone">
+                                    <i class="fas fa-phone"></i>
+                                    (555) 987-6543
+                                </p>
+                            </div>
+
+                            <div class="facility-details">
+                                <div class="detail-item">
+                                    <span class="label">Rating:</span>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.8 (89 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Hours:</span>
+                                    <span class="value open">Open until 8:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Wait Time:</span>
+                                    <span class="value">~15 minutes</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-specialties">
+                                <span class="specialty-tag">Family Medicine</span>
+                                <span class="specialty-tag">Pediatrics</span>
+                                <span class="specialty-tag">Women's Health</span>
+                            </div>
+
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="getDirections('downtown-family')">
+                                    <i class="fas fa-directions"></i>
+                                    Directions
+                                </button>
+                                <button class="btn-secondary" onclick="callFacility('555-987-6543')">
+                                    <i class="fas fa-phone"></i>
+                                    Call
+                                </button>
+                                <button class="btn-primary" onclick="bookAppointment('downtown-family')">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-header">
+                                <div class="facility-type urgent-care">
+                                    <i class="fas fa-ambulance"></i>
+                                    <span>Urgent Care</span>
+                                </div>
+                                <div class="facility-distance">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>3.1 miles</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-info">
+                                <h3>QuickCare Urgent Care Center</h3>
+                                <p class="facility-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    789 Broadway Avenue, New York, NY 10003
+                                </p>
+                                <p class="facility-phone">
+                                    <i class="fas fa-phone"></i>
+                                    (555) 456-7890
+                                </p>
+                            </div>
+
+                            <div class="facility-details">
+                                <div class="detail-item">
+                                    <span class="label">Rating:</span>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <span>4.1 (203 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Hours:</span>
+                                    <span class="value open">Open until 10:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Wait Time:</span>
+                                    <span class="value short">~5 minutes</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-specialties">
+                                <span class="specialty-tag">Urgent Care</span>
+                                <span class="specialty-tag">Minor Injuries</span>
+                                <span class="specialty-tag">X-Ray</span>
+                            </div>
+
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="getDirections('quickcare')">
+                                    <i class="fas fa-directions"></i>
+                                    Directions
+                                </button>
+                                <button class="btn-secondary" onclick="callFacility('555-456-7890')">
+                                    <i class="fas fa-phone"></i>
+                                    Call
+                                </button>
+                                <button class="btn-primary" onclick="checkIn('quickcare')">
+                                    <i class="fas fa-clipboard-check"></i>
+                                    Check In
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="facility-card">
+                            <div class="facility-header">
+                                <div class="facility-type pharmacy">
+                                    <i class="fas fa-prescription-bottle"></i>
+                                    <span>Pharmacy</span>
+                                </div>
+                                <div class="facility-distance">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>0.9 miles</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-info">
+                                <h3>HealthMart Pharmacy</h3>
+                                <p class="facility-address">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    321 Oak Street, New York, NY 10001
+                                </p>
+                                <p class="facility-phone">
+                                    <i class="fas fa-phone"></i>
+                                    (555) 321-0987
+                                </p>
+                            </div>
+
+                            <div class="facility-details">
+                                <div class="detail-item">
+                                    <span class="label">Rating:</span>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9 (67 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Hours:</span>
+                                    <span class="value open">Open until 9:00 PM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Delivery:</span>
+                                    <span class="value available">Available</span>
+                                </div>
+                            </div>
+
+                            <div class="facility-specialties">
+                                <span class="specialty-tag">Prescription Filling</span>
+                                <span class="specialty-tag">Vaccinations</span>
+                                <span class="specialty-tag">Health Screenings</span>
+                            </div>
+
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="getDirections('healthmart')">
+                                    <i class="fas fa-directions"></i>
+                                    Directions
+                                </button>
+                                <button class="btn-secondary" onclick="callFacility('555-321-0987')">
+                                    <i class="fas fa-phone"></i>
+                                    Call
+                                </button>
+                                <button class="btn-primary" onclick="transferPrescription('healthmart')">
+                                    <i class="fas fa-prescription"></i>
+                                    Transfer Rx
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/hospitals.js"></script>
+</body>
+</html>

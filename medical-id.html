@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical ID - MediCare</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/medical-id.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>MediCare</span>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="dashboard.html">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="medications.html">
+                        <i class="fas fa-pills"></i>
+                        <span>Medications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="reminders.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Reminders</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="history.html">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="hospitals.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospitals & Clinics</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doctors.html">
+                        <i class="fas fa-user-md"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="vitals.html">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Vital Signs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a href="medical-id.html">
+                        <i class="fas fa-id-card"></i>
+                        <span>Medical ID</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Medical ID</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn-primary" onclick="shareMedicalID()">
+                        <i class="fas fa-share"></i>
+                        Share ID
+                    </button>
+                </div>
+            </header>
+
+            <div class="medical-id-content">
+                <!-- Medical ID Card -->
+                <div class="medical-id-section">
+                    <div class="id-card-container">
+                        <div class="id-card" id="medicalIDCard">
+                            <div class="id-header">
+                                <div class="id-photo">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="id-basic-info">
+                                    <h2 id="idName">John Doe</h2>
+                                    <p id="idDob">Date of Birth: Jan 1, 1980</p>
+                                    <p id="idBloodType">Blood Type: O+</p>
+                                </div>
+                            </div>
+
+                            <div class="id-emergency">
+                                <h3>Emergency Contact</h3>
+                                <p id="emergencyName">Jane Doe</p>
+                                <p id="emergencyPhone">(555) 123-4567</p>
+                                <p id="emergencyRelation">Spouse</p>
+                            </div>
+
+                            <div class="id-medical-info">
+                                <h3>Medical Information</h3>
+                                <div class="medical-conditions">
+                                    <h4>Conditions</h4>
+                                    <p id="conditions">Hypertension, Type 2 Diabetes</p>
+                                </div>
+                                <div class="allergies">
+                                    <h4>Allergies</h4>
+                                    <p id="allergies">Penicillin, Shellfish</p>
+                                </div>
+                                <div class="medications">
+                                    <h4>Current Medications</h4>
+                                    <p id="currentMeds">Lisinopril 10mg, Metformin 500mg</p>
+                                </div>
+                            </div>
+
+                            <div class="id-organs">
+                                <h3>Organ Donor</h3>
+                                <p id="organDonor">Yes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Medical ID -->
+                <div class="medical-id-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-edit"></i> Edit Medical ID</h2>
+                    </div>
+
+                    <form id="medicalIDForm" class="medical-id-form">
+                        <div class="form-section">
+                            <h3>Basic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" name="fullName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bloodType">Blood Type</label>
+                                    <select id="bloodType" name="bloodType">
+                                        <option value="">Select Blood Type</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="height">Height (inches)</label>
+                                    <input type="number" id="height" name="height" min="36" max="96">
+                                </div>
+                                <div class="form-group">
+                                    <label for="weight">Weight (lbs)</label>
+                                    <input type="number" id="weight" name="weight" min="50" max="500">
+                                </div>
+                                <div class="form-group">
+                                    <label for="organDonor">Organ Donor</label>
+                                    <select id="organDonor" name="organDonor">
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Emergency Contact</h3>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="emergencyName">Name</label>
+                                    <input type="text" id="emergencyName" name="emergencyName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyPhone">Phone</label>
+                                    <input type="tel" id="emergencyPhone" name="emergencyPhone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyRelation">Relationship</label>
+                                    <input type="text" id="emergencyRelation" name="emergencyRelation" placeholder="e.g., Spouse, Parent, Child">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Medical Information</h3>
+                            <div class="form-group">
+                                <label for="conditions">Medical Conditions</label>
+                                <textarea id="conditions" name="conditions" rows="3" placeholder="List your medical conditions (e.g., hypertension, diabetes)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="allergies">Allergies</label>
+                                <textarea id="allergies" name="allergies" rows="3" placeholder="List your allergies (e.g., penicillin, nuts)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="medications">Current Medications</label>
+                                <textarea id="medications" name="medications" rows="3" placeholder="List your current medications"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="additionalInfo">Additional Information</label>
+                                <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Any additional medical information, implants, or special instructions"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="resetMedicalID()">Reset</button>
+                            <button type="submit" class="btn-primary">Save Medical ID</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="medical-id-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                    </div>
+
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn" onclick="callEmergency()">
+                            <i class="fas fa-phone"></i>
+                            <span>Call Emergency</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="shareMedicalID()">
+                            <i class="fas fa-share"></i>
+                            <span>Share ID</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="printMedicalID()">
+                            <i class="fas fa-print"></i>
+                            <span>Print ID</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="downloadMedicalID()">
+                            <i class="fas fa-download"></i>
+                            <span>Download PDF</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="scanQRCode()">
+                            <i class="fas fa-qrcode"></i>
+                            <span>QR Code</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="emergencyMode()">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Emergency Mode</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Emergency Mode Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content emergency-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Emergency Mode</h2>
+                <button class="close-btn" onclick="closeEmergencyModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="emergency-alert">
+                    <i class="fas fa-ambulance"></i>
+                    <h3>Emergency Services Activated</h3>
+                    <p>Your medical information has been prepared for emergency responders.</p>
+                </div>
+
+                <div class="emergency-info">
+                    <div class="emergency-section">
+                        <h4>Current Location</h4>
+                        <p id="currentLocation">Location access needed</p>
+                    </div>
+                    <div class="emergency-section">
+                        <h4>Emergency Contact</h4>
+                        <p id="emergencyContactInfo">No emergency contact set</p>
+                    </div>
+                    <div class="emergency-section">
+                        <h4>Critical Information</h4>
+                        <p id="criticalInfo">Blood type, allergies, and current medications will be shared</p>
+                    </div>
+                </div>
+
+                <div class="emergency-actions">
+                    <button class="btn-emergency" onclick="call911()">
+                        <i class="fas fa-phone"></i>
+                        Call 911
+                    </button>
+                    <button class="btn-secondary" onclick="sendEmergencyAlert()">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Alert to Contacts
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/medical-id.js"></script>
+</body>
+</html>
